@@ -4,7 +4,7 @@ public class Jogo {
     private String nome;
     private String categoria;
     private int nota;
-
+    private int idJogo;
 
     public String getNome() {
         return nome;
@@ -28,5 +28,13 @@ public class Jogo {
 
     public void setNota(int nota) {
         this.nota = nota;
+    }
+
+    public int getIdJogo() {
+        return idJogo;
+    }
+
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
     }
 }
