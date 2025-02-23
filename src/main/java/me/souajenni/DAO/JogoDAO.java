@@ -43,7 +43,7 @@ public class JogoDAO {
     public int atualizarJogo(Jogo jogo) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
-        String query = "UPDATE jogo SET nome = \""+jogo.getNome()+"\", categoria = \""+jogo.getCategoria()+"\", nota = "+jogo.getNota()+" WHERE idJogo =" + jogo.getIdJogo();
+        String query = "UPDATE jogo SET nome = \""+jogo.getNome()+"\", categoria = \""+jogo.getCategoria()+"\", nota = "+jogo.getNota()+" WHERE id =" + jogo.getIdJogo();
         int linhas = statement.executeUpdate(query);
 
         return linhas;

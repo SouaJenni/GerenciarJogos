@@ -22,7 +22,7 @@ public class AdicionarJogadorAoJogo extends JFrame {
 
     public AdicionarJogadorAoJogo(Menu parent) {
         setContentPane(painelAdicionarJogador);
-        setTitle("Adicionar Jogador ao jogo");
+        setTitle("Adicionar jogador ao jogo");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

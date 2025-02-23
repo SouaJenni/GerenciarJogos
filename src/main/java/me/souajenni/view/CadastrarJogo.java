@@ -54,7 +54,7 @@ public class CadastrarJogo extends JFrame {
             utils.mostrarErro(e.getMessage());
         }
 
-        btSalvar.addActionListener(this::salvar);
+        btSalvar.addActionListener(this::atualizar);
         btSalvar.setText("Atualizar");
         btVoltar.addActionListener(this::voltar);
     }
@@ -65,18 +65,21 @@ public class CadastrarJogo extends JFrame {
         if (nome.isEmpty()) {
             utils.mostrarAlerta("O nome não pode ser vazio!");
             return;
-        }else{
-            jogo.setNome(nome);
         }
+        jogo.setNome(nome);
+
         String categoria = txtCategoria.getText();
         if (categoria.isEmpty()) {
             utils.mostrarAlerta("A categoria não pode ser vazia!");
             return;
-        }else{
-            jogo.setCategoria(categoria);
         }
+        jogo.setCategoria(categoria);
+
         try {
             int nota = Integer.parseInt(txtNota.getText());
+            if(nota > 5 || nota < 0){
+                utils.mostrarAlerta("A nota deve um número de 0 a 5.");
+            }
             jogo.setNota(nota);
         }catch(NumberFormatException ex){
             utils.mostrarAlerta("Nota deve ser um número intero!");
@@ -87,6 +90,45 @@ public class CadastrarJogo extends JFrame {
         try{
             jogoDAO.inserirJogo(jogo);
             utils.mostrarInformacao("Jogo inserido com sucesso!");
+            parent.setVisible(true);
+            dispose();
+        }catch(Exception ex){
+            utils.mostrarAlerta(ex.getMessage());
+        }
+    }
+
+    public void atualizar(ActionEvent e) {
+        Jogo jogo = new Jogo();
+        String nome = txtNome.getText();
+        if (nome.isEmpty()) {
+            utils.mostrarAlerta("O nome não pode ser vazio!");
+            return;
+        }
+        jogo.setNome(nome);
+
+        String categoria = txtCategoria.getText();
+        if (categoria.isEmpty()) {
+            utils.mostrarAlerta("A categoria não pode ser vazia!");
+            return;
+        }
+        jogo.setCategoria(categoria);
+
+        try {
+            int nota = Integer.parseInt(txtNota.getText());
+            if(nota > 5 || nota < 0){
+                utils.mostrarAlerta("A nota deve um número de 0 a 5.");
+            }
+            jogo.setNota(nota);
+        }catch(NumberFormatException ex){
+            utils.mostrarAlerta("Nota deve ser um número intero!");
+            return;
+        }
+
+        jogo.setIdJogo(idJogo);
+        JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
+        try{
+            jogoDAO.atualizarJogo(jogo);
+            utils.mostrarInformacao("Jogo atualizado com sucesso!");
             parent.setVisible(true);
             dispose();
         }catch(Exception ex){
