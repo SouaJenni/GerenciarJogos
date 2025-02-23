@@ -51,23 +51,23 @@ public class JogoDAO {
 
     public boolean excluirJogoESeusJogadores(int idJogo) throws SQLException {
         Statement statement = this.conexao.createStatement();
-//        JogadorDAO jogadorDAO = new JogadorDAO(conexao);
-//        jogadorDAO.excluirJogadoresDoJogo(id);
+        JogadorDAO jogadorDAO = new JogadorDAO(conexao);
+        jogadorDAO.excluirJogadoresDoJogo(idJogo);
 
-        String query = "DELETE FROM jogo WHERE idJogo = " + idJogo;
+        String query = "DELETE FROM jogo WHERE id = " + idJogo;
         int linhas = statement.executeUpdate(query);
 
         return linhas > 0;
     }
 
-    public int bucarJogoPorNome(String nome) throws SQLException {
+    public int buscarJogoPorNome(String nome) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
         String query = "SELECT * FROM jogo WHERE nome = \"" + nome + "\"";
         ResultSet resultado = statement.executeQuery(query);
         int idJogo = -1;
         while (resultado.next()) {
-            idJogo = resultado.getInt("idJogo");
+            idJogo = resultado.getInt("id");
         }
         return idJogo;
     }
@@ -75,7 +75,7 @@ public class JogoDAO {
     public Jogo buscarJogoPorId(int id) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
-        String query = "SELECT * FROM jogo WHERE idJogo = " + id;
+        String query = "SELECT * FROM jogo WHERE id = " + id;
         ResultSet resultado = statement.executeQuery(query);
         Jogo jogo = new Jogo();
         while (resultado.next()) {

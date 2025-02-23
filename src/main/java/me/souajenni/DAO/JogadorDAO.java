@@ -19,7 +19,7 @@ public class JogadorDAO {
     public boolean inserirJogador(Jogador jogador, int idJogo) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
-        String query = "INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_idJogo) VALUES " + "(\""+jogador.getUsuario()+"\", "+jogador.getVitorias()+", "+jogador.getDerrotas()+", \""+jogador.getElo()+"\", "+idJogo+")";
+        String query = "INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES " + "(\""+jogador.getUsuario()+"\", "+jogador.getVitorias()+", "+jogador.getDerrotas()+", \""+jogador.getElo()+"\", "+idJogo+")";
         int linhas = statement.executeUpdate(query);
 
         return linhas > 0;
@@ -28,10 +28,10 @@ public class JogadorDAO {
     public List<Jogador> listarJogadoresPorJogo(int idJogo) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
-        String query = "SELECT * FROM jogador WHERE Jogo_idJogo = "+idJogo;
+        String query = "SELECT * FROM jogador WHERE Jogo_id = "+idJogo;
         ResultSet resultado = statement.executeQuery(query);
 
-        List<Jogador> jogadores = new ArrayList<Jogador>();
+        List<Jogador> jogadores = new ArrayList();
         while (resultado.next()) {
             Jogador jogador = new Jogador();
             jogador.setUsuario(resultado.getString("usuario"));
@@ -55,7 +55,7 @@ public class JogadorDAO {
     public boolean excluirJogadoresDoJogo(int idJogo) throws SQLException {
         Statement statement = this.conexao.createStatement();
 
-        String query = "DELETE FROM jogador WHERE Jogo_idJogo = " + idJogo;;
+        String query = "DELETE FROM jogador WHERE Jogo_id = " + idJogo;;
         int linhas = statement.executeUpdate(query);
 
         return linhas > 0;

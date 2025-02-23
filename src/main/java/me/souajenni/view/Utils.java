@@ -18,7 +18,7 @@ public class Utils {
 
     }
 
-    public int mostarConfirmacao(String mensagem){
+    public int mostrarConfirmacao(String mensagem){
         int opcao = JOptionPane.showConfirmDialog(null, mensagem, "Escolha uma opção", JOptionPane.YES_NO_OPTION);
         return opcao;
     }

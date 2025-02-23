@@ -39,9 +39,9 @@ public class Menu extends JFrame {
         btListarJogos.addActionListener(this::listarJogos);
         btAdicionarJogador.addActionListener(this::adicionarJogadorAoJogo);
         btListarJogadoresPorJogo.addActionListener(this::listarJogadoresPorJogo);
-        btAtualizarJogo.addActionListener(this::atualizarJogo);
-        btDeletarJogador.addActionListener(this::deletarJogador);
-        btDeletarJogo.addActionListener(this::deletarJogo);
+        btAtualizarJogo.addActionListener(this::buscarJogoParaAtualizar);
+        btDeletarJogador.addActionListener(this::buscarJogadorParaDeletar);
+        btDeletarJogo.addActionListener(this::buscarJogoParaDeletar);
     }
 
     public void cadastrarJogo(ActionEvent e) {
@@ -55,23 +55,26 @@ public class Menu extends JFrame {
     }
 
     public void adicionarJogadorAoJogo(ActionEvent e) {
-
+        new AdicionarJogadorAoJogo(this);
+        dispose();
     }
 
     public void listarJogadoresPorJogo(ActionEvent e) {
-
+        new Buscar(this, "listarJogadores");
+        setVisible(false);
     }
 
-    public void atualizarJogo(ActionEvent e) {
-
+    public void buscarJogoParaAtualizar(ActionEvent e) {
+        new Buscar(this, "atualizarJogo");
+        setVisible(false);
     }
 
-    public void deletarJogador(ActionEvent e) {
-
+    public void buscarJogadorParaDeletar(ActionEvent e) {
+        new Buscar(this, "deletarJogador");
     }
 
-    public void deletarJogo(ActionEvent e) {
-
+    public void buscarJogoParaDeletar(ActionEvent e) {
+        new Buscar(this, "deletarJogo");
     }
 
     public Connection getConexao() {

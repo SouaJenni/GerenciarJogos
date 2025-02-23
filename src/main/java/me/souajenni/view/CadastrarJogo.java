@@ -30,6 +30,32 @@ public class CadastrarJogo extends JFrame {
         utils = new Utils();
 
         btSalvar.addActionListener(this::salvar);
+        btSalvar.setText("Salvar");
+        btVoltar.addActionListener(this::voltar);
+    }
+
+    public CadastrarJogo(Menu parent, int idJogo) {
+        setContentPane(painelCadastrar);
+        setTitle("Cadastrar um jogo");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        this.parent = parent;
+        utils = new Utils();
+        this.idJogo = idJogo;
+
+        JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
+        try{
+            Jogo jogo = jogoDAO.buscarJogoPorId(idJogo);
+            txtNome.setText(jogo.getNome());
+            txtCategoria.setText(jogo.getCategoria());
+            txtNota.setText(jogo.getNota()+"");
+        }catch (Exception e){
+            utils.mostrarErro(e.getMessage());
+        }
+
+        btSalvar.addActionListener(this::salvar);
+        btSalvar.setText("Atualizar");
         btVoltar.addActionListener(this::voltar);
     }
 
