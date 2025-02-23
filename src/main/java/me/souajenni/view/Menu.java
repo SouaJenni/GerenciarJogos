@@ -45,12 +45,12 @@ public class Menu extends JFrame {
     }
 
     public void cadastrarJogo(ActionEvent e) {
-        new CadastrarJogo();
+        new CadastrarJogo(this);
         dispose();
     }
 
     public void listarJogos(ActionEvent e) {
-        new ListarJogos();
+        new ListarJogos(this);
         dispose();
     }
 
@@ -72,6 +72,10 @@ public class Menu extends JFrame {
 
     public void deletarJogo(ActionEvent e) {
 
+    }
+
+    public Connection getConexao() {
+        return conexao;
     }
 
     public static void main(String[] args) {
