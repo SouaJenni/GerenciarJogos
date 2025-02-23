@@ -77,10 +77,11 @@ public class CadastrarJogo extends JFrame {
 
         try {
             int nota = Integer.parseInt(txtNota.getText());
+            jogo.setNota(nota);
             if(nota > 5 || nota < 0){
                 utils.mostrarAlerta("A nota deve um número de 0 a 5.");
+                return;
             }
-            jogo.setNota(nota);
         }catch(NumberFormatException ex){
             utils.mostrarAlerta("Nota deve ser um número intero!");
             return;
@@ -106,6 +107,7 @@ public class CadastrarJogo extends JFrame {
         }
         jogo.setNome(nome);
 
+
         String categoria = txtCategoria.getText();
         if (categoria.isEmpty()) {
             utils.mostrarAlerta("A categoria não pode ser vazia!");
@@ -115,10 +117,11 @@ public class CadastrarJogo extends JFrame {
 
         try {
             int nota = Integer.parseInt(txtNota.getText());
+            jogo.setNota(nota);
             if(nota > 5 || nota < 0){
                 utils.mostrarAlerta("A nota deve um número de 0 a 5.");
+                return;
             }
-            jogo.setNota(nota);
         }catch(NumberFormatException ex){
             utils.mostrarAlerta("Nota deve ser um número intero!");
             return;
