@@ -56,8 +56,20 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 SELECT * FROM jogo;
 INSERT INTO jogo (nome, categoria, nota) VALUES ("Free Fire", "Battle Royale", 2);
 INSERT INTO jogo (nome, categoria, nota) VALUES ("Among Us", "Sobrevivencia", 1);
+INSERT INTO jogo (nome, categoria, nota) VALUES ("LOL", "MOBA", 1);
+INSERT INTO jogo (nome, categoria, nota) VALUES ("Roblox", "Variedade", 3);
 
 SELECT * FROM jogador;
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("tatizinha", 95, 11, "Diamante", 16);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("filtz", 50, 3, "Mestre", 16);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("marcos_007", 45, 25, "Bronze", 16);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("nino", 32, 9, "Ouro", 16);
+
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("marcelin", 37, 10, "Ouro", 17);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("larax", 54, 17, "Platina", 17);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("rian", 10, 2, "Bronze", 17);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("sakura", 90, 10, "Diamante", 17);
+
 ALTER TABLE jogador ADD COLUMN Jogo_id INT;
 ALTER TABLE jogador ADD CONSTRAINT fk_jogo FOREIGN KEY (Jogo_id) REFERENCES jogo(id);
 

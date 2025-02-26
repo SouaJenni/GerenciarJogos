@@ -71,10 +71,12 @@ public class Menu extends JFrame {
 
     public void buscarJogadorParaDeletar(ActionEvent e) {
         new Buscar(this, "deletarJogador");
+        setVisible(false);
     }
 
     public void buscarJogoParaDeletar(ActionEvent e) {
         new Buscar(this, "deletarJogo");
+        setVisible(false);
     }
 
     public Connection getConexao() {

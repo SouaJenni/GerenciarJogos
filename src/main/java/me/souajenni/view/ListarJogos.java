@@ -26,7 +26,12 @@ public class ListarJogos extends JFrame {
         this.parent = parent;
 
         String[] colunas = {"Nome", "Categoria", "Nota"};
-        DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+        DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
 

@@ -24,7 +24,12 @@ public class ListarJogadoresPorJogo extends JFrame {
         this.parent = parent;
 
         String[] colunas = {"Usuario", "Vitorias", "Derrotas", "Elo"};
-        DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+        DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         JogadorDAO jogadorDAO = new JogadorDAO(parent.getConexao());
         try{
