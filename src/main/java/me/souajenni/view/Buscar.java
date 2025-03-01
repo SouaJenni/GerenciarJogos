@@ -33,6 +33,12 @@ public class Buscar extends JFrame {
                 btBuscar.addActionListener(this::listarJogadores);
                 break;
 
+            case "atualizarJogador":
+                labelBuscar.setText("Selecione o usuário:");
+                btBuscar.setText("Buscar");
+                btBuscar.addActionListener(this::atualizarJogador);
+                break;
+
             case "atualizarJogo":
                 labelBuscar.setText("Selecione o jogo:");
                 btBuscar.setText("Buscar");
@@ -64,7 +70,7 @@ public class Buscar extends JFrame {
     public void carregarItens(String opcao) throws SQLException {
         selecionarItem.removeAllItems();
 
-        if (opcao.equals("deletarJogador")) {
+        if (opcao.equals("deletarJogador") || opcao.equals("atualizarJogador")) {
             JogadorDAO jogadorDAO = new JogadorDAO(parent.getConexao());
             List<String> jogadores = jogadorDAO.nomesDeUsuario();
             for (String jogador : jogadores) {
@@ -123,6 +129,30 @@ public class Buscar extends JFrame {
             utils.mostrarErro(ex.getMessage());
             return;
         }
+    }
+
+    public void atualizarJogador(ActionEvent e){
+        String jogadorSelecionado = (String) selecionarItem.getSelectedItem();
+        if (jogadorSelecionado == null) {
+            utils.mostrarAlerta("Selecione um jogador!");
+            return;
+        }
+
+        JogadorDAO jogadorDAO = new JogadorDAO(parent.getConexao());
+        try{
+            int idJogador = jogadorDAO.buscarJogadorPorUsuario(jogadorSelecionado);
+            if(idJogador == -1){
+                utils.mostrarAlerta("Jogo não encontrado!");
+                return;
+            }
+            new AdicionarJogadorAoJogo(parent, idJogador);
+            dispose();
+
+        }catch(Exception ex){
+            utils.mostrarErro(ex.getMessage());
+            return;
+        }
+
     }
 
     public void deletarJogador(ActionEvent e){

@@ -17,6 +17,7 @@ public class Menu extends JFrame {
     private JButton btAtualizarJogo;
     private JButton btDeletarJogador;
     private JButton btDeletarJogo;
+    private JButton btAtualizarJogador;
     private Conector conector;
     private Connection conexao;
     private Utils utils;
@@ -42,6 +43,7 @@ public class Menu extends JFrame {
         btAtualizarJogo.addActionListener(this::buscarJogoParaAtualizar);
         btDeletarJogador.addActionListener(this::buscarJogadorParaDeletar);
         btDeletarJogo.addActionListener(this::buscarJogoParaDeletar);
+        btAtualizarJogador.addActionListener(this::buscarJogadorParaAtualizar);
     }
 
     public void cadastrarJogo(ActionEvent e) {
@@ -61,6 +63,11 @@ public class Menu extends JFrame {
 
     public void listarJogadoresPorJogo(ActionEvent e) {
         new Buscar(this, "listarJogadores");
+        setVisible(false);
+    }
+
+    public void buscarJogadorParaAtualizar(ActionEvent e) {
+        new Buscar(this, "atualizarJogador");
         setVisible(false);
     }
 

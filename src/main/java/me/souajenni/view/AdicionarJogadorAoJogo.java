@@ -21,6 +21,7 @@ public class AdicionarJogadorAoJogo extends JFrame {
     private JComboBox selecionarJogo;
     private Menu parent;
     private Utils utils;
+    private int idJogador = -1;
 
     public AdicionarJogadorAoJogo(Menu parent) {
         setContentPane(painelAdicionarJogador);
@@ -37,13 +38,50 @@ public class AdicionarJogadorAoJogo extends JFrame {
             throw new RuntimeException(e);
         }
 
+        btSalvar.addActionListener(this::salvar);
+        btSalvar.setText("Salvar");
+        btVoltar.addActionListener(this::voltar);
+    }
+
+    public AdicionarJogadorAoJogo(Menu parent, int idJogador) throws SQLException {
+        setContentPane(painelAdicionarJogador);
+        setTitle("Atualizar jogador");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        this.parent = parent;
+        this.utils = new Utils();
+        this.idJogador = idJogador;
+
         try {
             carregarJogos();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        btSalvar.addActionListener(this::salvar);
+        JogadorDAO jogadorDAO = new JogadorDAO(parent.getConexao());
+        JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
+        try {
+            Jogador jogador = jogadorDAO.buscarJogadorPorId(idJogador);
+            txtUsuario.setText(jogador.getUsuario());
+            txtVitorias.setText(jogador.getVitorias()+"");
+            txtDerrotas.setText(jogador.getDerrotas()+"");
+            jogador.setElo(jogador.getElo());
+            jogador.setIdJogoDoJogador(jogador.getIdJogoDoJogador());
+
+            for (int i = 0; i < selecionarJogo.getItemCount(); i++) {
+                if (jogoDAO.buscarJogoPorNome((String) selecionarJogo.getItemAt(i)) == jogador.getIdJogoDoJogador()) {
+                    selecionarJogo.setSelectedIndex(i);
+                    selecionarJogo.setEnabled(false);
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        btSalvar.addActionListener(this::atualizar);
+        btSalvar.setText("Atualizar");
         btVoltar.addActionListener(this::voltar);
     }
 
@@ -108,6 +146,48 @@ public class AdicionarJogadorAoJogo extends JFrame {
         try{
             jogadorDAO.inserirJogador(jogador, idJogo);
             utils.mostrarInformacao("Jogador adicionado com sucesso!");
+            parent.setVisible(true);
+            dispose();
+        }catch(Exception ex){
+            utils.mostrarErro(ex.getMessage());
+            return;
+        }
+    }
+
+    public void atualizar(ActionEvent e){
+        String usuario = txtUsuario.getText();
+        if(usuario.isEmpty()){
+            utils.mostrarAlerta("Usuário não pode ser vazio!");
+            return;
+        }
+
+        int vitorias = 0;
+        try{
+            vitorias = Integer.parseInt(txtVitorias.getText());
+        }catch(NumberFormatException ex){
+            utils.mostrarAlerta("Vitórias deve ser um número inteiro.");
+            return;
+        }
+
+        int derrotas = 0;
+        try {
+            derrotas = Integer.parseInt(txtDerrotas.getText());
+        }catch(NumberFormatException ex){
+            utils.mostrarAlerta("Derrotas deve ser um número inteiro.");
+            return;
+        }
+
+        Jogador jogador = new Jogador();
+        jogador.setUsuario(usuario);
+        jogador.setVitorias(vitorias);
+        jogador.setDerrotas(derrotas);
+        jogador.setElo(definirElo());
+        jogador.setIdJogador(idJogador);
+
+        JogadorDAO jogadorDAO = new JogadorDAO(parent.getConexao());
+        try{
+            jogadorDAO.atualizarJogador(jogador);
+            utils.mostrarInformacao("Jogador atualizado com sucesso!");
             parent.setVisible(true);
             dispose();
         }catch(Exception ex){

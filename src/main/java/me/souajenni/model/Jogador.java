@@ -6,6 +6,7 @@ public class Jogador {
     private int derrotas;
     private String elo;
     private int idJogador;
+    private int idJogoDoJogador;
 
     public String getUsuario() {
         return usuario;
@@ -45,5 +46,13 @@ public class Jogador {
 
     public void setIdJogador(int idJogador) {
         this.idJogador = idJogador;
+    }
+
+    public int getIdJogoDoJogador() {
+        return idJogoDoJogador;
+    }
+
+    public void setIdJogoDoJogador(int idJogoDoJogador) {
+        this.idJogoDoJogador = idJogoDoJogador;
     }
 }
