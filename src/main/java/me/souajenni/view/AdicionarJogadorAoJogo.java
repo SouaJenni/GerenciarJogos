@@ -8,15 +8,17 @@ import me.souajenni.model.Jogo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 public class AdicionarJogadorAoJogo extends JFrame {
     private JTextField txtUsuario;
     private JTextField txtVitorias;
     private JTextField txtDerrotas;
-    private JTextField txtJogo;
     private JButton btSalvar;
     private JButton btVoltar;
     private JPanel painelAdicionarJogador;
+    private JComboBox selecionarJogo;
     private Menu parent;
     private Utils utils;
 
@@ -29,8 +31,29 @@ public class AdicionarJogadorAoJogo extends JFrame {
         this.parent = parent;
         this.utils = new Utils();
 
+        try {
+            carregarJogos();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            carregarJogos();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         btSalvar.addActionListener(this::salvar);
         btVoltar.addActionListener(this::voltar);
+    }
+
+    public void carregarJogos() throws SQLException {
+        JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
+        List<String> jogos = jogoDAO.NomesDosJogos();
+        selecionarJogo.removeAllItems();
+        for (String jogo : jogos) {
+            selecionarJogo.addItem(jogo);
+        }
     }
 
     public void salvar(ActionEvent e){
@@ -56,10 +79,16 @@ public class AdicionarJogadorAoJogo extends JFrame {
             return;
         }
 
+        String jogoSelecionado = (String) selecionarJogo.getSelectedItem();
+        if (jogoSelecionado == null) {
+            utils.mostrarAlerta("Selecione um jogo!");
+            return;
+        }
+
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
         int idJogo;
         try{
-            idJogo = jogoDAO.buscarJogoPorNome(txtJogo.getText());
+            idJogo = jogoDAO.buscarJogoPorNome(jogoSelecionado);
             if(idJogo == -1){
                 utils.mostrarAlerta("Jogo não encontrado!");
                 return;

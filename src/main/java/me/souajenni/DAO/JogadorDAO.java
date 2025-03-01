@@ -60,4 +60,17 @@ public class JogadorDAO {
 
         return linhas > 0;
     }
+
+    public List<String> nomesDeUsuario() throws SQLException {
+        Statement statement = this.conexao.createStatement();
+
+        List<String> jogadores = new ArrayList<>();
+        String query = "SELECT usuario FROM jogador";
+        ResultSet resultado = statement.executeQuery(query);
+        while (resultado.next()) {
+            jogadores.add(resultado.getString("usuario"));
+        }
+
+        return jogadores;
+    }
 }

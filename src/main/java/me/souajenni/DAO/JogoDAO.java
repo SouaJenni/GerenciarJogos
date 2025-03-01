@@ -85,5 +85,18 @@ public class JogoDAO {
         }
         return jogo;
     }
+
+    public List<String> NomesDosJogos() throws SQLException {
+        Statement statement = this.conexao.createStatement();
+
+        List<String> jogos = new ArrayList<>();
+        String query = "SELECT nome FROM jogo";
+        ResultSet resultado = statement.executeQuery(query);
+        while (resultado.next()) {
+            jogos.add(resultado.getString("nome"));
+        }
+
+        return jogos;
+    }
 }
 
