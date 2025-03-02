@@ -60,6 +60,14 @@ INSERT INTO jogo (nome, categoria, nota) VALUES ("LOL", "MOBA", 1);
 INSERT INTO jogo (nome, categoria, nota) VALUES ("Roblox", "Variedade", 3);
 
 SELECT * FROM jogador;
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Laysie", 43, 22, "Ouro", 1);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Ceuzan", 31, 5, "Platina", 1);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Briril", 234, 75, "Diamante", 1);
+
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Bauska", 44, 5, "Platina", 2);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Haikus", 78, 3, "Mestre", 2);
+INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("Facair", 12, 1, "Bronze", 2);
+
 INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("tatizinha", 95, 11, "Diamante", 16);
 INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("filtz", 50, 3, "Mestre", 16);
 INSERT INTO jogador (usuario, vitorias, derrotas, elo, Jogo_id) VALUES ("marcos_007", 45, 25, "Bronze", 16);

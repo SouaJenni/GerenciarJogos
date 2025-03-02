@@ -97,7 +97,7 @@ public class Buscar extends JFrame {
         try {
             int idJogo = jogoDAO.buscarJogoPorNome(jogoSelecionado);
             if(idJogo == -1){
-                utils.mostrarAlerta("Curso não encontrado.");
+                utils.mostrarAlerta("Jogo não encontrado.");
                 return;
             }
             new ListarJogadoresPorJogo(parent, idJogo);
@@ -169,11 +169,11 @@ public class Buscar extends JFrame {
         }
         try{
             if(jogadorDAO.excluirJogador(jogadorSelecionado)){
-                utils.mostrarInformacao("Jogador excluido com sucesso!");
+                utils.mostrarInformacao("Jogador excluído com sucesso!");
                 parent.setVisible(true);
                 dispose();
             }else{
-                utils.mostrarAlerta("Aluno não enocntrado.");
+                utils.mostrarAlerta("Jogador não enocntrado.");
                 return;
             }
         }catch(Exception ex){

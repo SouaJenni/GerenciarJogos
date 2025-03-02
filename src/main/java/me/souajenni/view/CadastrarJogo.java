@@ -5,16 +5,20 @@ import me.souajenni.model.Jogo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class CadastrarJogo extends JFrame {
     private JTextField txtCategoria;
     private JTextField txtNome;
-    private JTextField txtNota;
     private JButton btSalvar;
     private JButton btVoltar;
     private JPanel painelCadastrar;
+    private JRadioButton rb0;
+    private JRadioButton rb1;
+    private JRadioButton rb2;
+    private JRadioButton rb3;
+    private JRadioButton rb4;
+    private JRadioButton rb5;
+    private ButtonGroup selecionarNota;
     private Menu parent;
     private Utils utils;
     private int idJogo = -1;
@@ -28,6 +32,21 @@ public class CadastrarJogo extends JFrame {
         setVisible(true);
         this.parent = parent;
         utils = new Utils();
+        selecionarNota = new ButtonGroup();
+
+        selecionarNota.add(rb0);
+        selecionarNota.add(rb1);
+        selecionarNota.add(rb2);
+        selecionarNota.add(rb3);
+        selecionarNota.add(rb4);
+        selecionarNota.add(rb5);
+
+        rb0.setActionCommand("0");
+        rb1.setActionCommand("1");
+        rb2.setActionCommand("2");
+        rb3.setActionCommand("3");
+        rb4.setActionCommand("4");
+        rb5.setActionCommand("5");
 
         btSalvar.addActionListener(this::salvar);
         btSalvar.setText("Salvar");
@@ -36,12 +55,13 @@ public class CadastrarJogo extends JFrame {
 
     public CadastrarJogo(Menu parent, int idJogo) {
         setContentPane(painelCadastrar);
-        setTitle("Cadastrar um jogo");
+        setTitle("Atualizar um jogo");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         this.parent = parent;
         utils = new Utils();
+        selecionarNota = new ButtonGroup();
         this.idJogo = idJogo;
 
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
@@ -49,10 +69,43 @@ public class CadastrarJogo extends JFrame {
             Jogo jogo = jogoDAO.buscarJogoPorId(idJogo);
             txtNome.setText(jogo.getNome());
             txtCategoria.setText(jogo.getCategoria());
-            txtNota.setText(jogo.getNota()+"");
-        }catch (Exception e){
+            switch (jogo.getNota()) {
+                case 0:
+                    rb0.setSelected(true);
+                    break;
+                case 1:
+                    rb1.setSelected(true);
+                    break;
+                case 2:
+                    rb2.setSelected(true);
+                    break;
+                case 3:
+                    rb3.setSelected(true);
+                    break;
+                case 4:
+                    rb4.setSelected(true);
+                    break;
+                case 5:
+                    rb5.setSelected(true);
+                    break;
+            }
+            }catch (Exception e){
             utils.mostrarErro(e.getMessage());
         }
+
+        selecionarNota.add(rb0);
+        selecionarNota.add(rb1);
+        selecionarNota.add(rb2);
+        selecionarNota.add(rb3);
+        selecionarNota.add(rb4);
+        selecionarNota.add(rb5);
+
+        rb0.setActionCommand("0");
+        rb1.setActionCommand("1");
+        rb2.setActionCommand("2");
+        rb3.setActionCommand("3");
+        rb4.setActionCommand("4");
+        rb5.setActionCommand("5");
 
         btSalvar.addActionListener(this::atualizar);
         btSalvar.setText("Atualizar");
@@ -75,17 +128,11 @@ public class CadastrarJogo extends JFrame {
         }
         jogo.setCategoria(categoria);
 
-        try {
-            int nota = Integer.parseInt(txtNota.getText());
-            jogo.setNota(nota);
-            if(nota > 5 || nota < 0){
-                utils.mostrarAlerta("A nota deve um número de 0 a 5.");
-                return;
-            }
-        }catch(NumberFormatException ex){
-            utils.mostrarAlerta("Nota deve ser um número intero!");
+        int nota = notaSelecionada();
+        if (nota == -1) {
             return;
         }
+        jogo.setNota(nota);
 
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
         try{
@@ -115,17 +162,11 @@ public class CadastrarJogo extends JFrame {
         }
         jogo.setCategoria(categoria);
 
-        try {
-            int nota = Integer.parseInt(txtNota.getText());
-            jogo.setNota(nota);
-            if(nota > 5 || nota < 0){
-                utils.mostrarAlerta("A nota deve um número de 0 a 5.");
-                return;
-            }
-        }catch(NumberFormatException ex){
-            utils.mostrarAlerta("Nota deve ser um número intero!");
+        int nota = notaSelecionada();
+        if (nota == -1) {
             return;
         }
+        jogo.setNota(nota);
 
         jogo.setIdJogo(idJogo);
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
@@ -136,6 +177,15 @@ public class CadastrarJogo extends JFrame {
             dispose();
         }catch(Exception ex){
             utils.mostrarAlerta(ex.getMessage());
+        }
+    }
+
+    public int notaSelecionada() {
+        if (selecionarNota.getSelection() != null) {
+            return Integer.parseInt(selecionarNota.getSelection().getActionCommand());
+        } else {
+            utils.mostrarAlerta("Selecione uma nota.");
+            return -1;
         }
     }
 
