@@ -2,12 +2,12 @@ Este programa foi criado inteiramente em linguagem Java e apresenta conexão ao 
 
 Ao utilizar o programa, a primeira tela apresentada ao usuário é a tela de Menu, onde ele pode selecionar uma das opções presentes nos botões da tela. Ao selecionar a opção desejada, ele será redirecionado para a tela correspondente à ação.  
 
-!Tela [Menu](./imagens/menu.png)
+![Tela Menu](./imagens/menu.png)
 
 ## **1- Adicionar Jogo**
 Nesta tela, o usuário é capaz de adicionar um jogo ao banco de dados. Para tal, basta preencher corretamente as lacunas de nome e categoria e selecionar um valor para a nota com a qual ele avaliará o jogo. Após preenchido, basta que clique no botão salvar para que as informações sejam devidamente salvas. Caso haja algo errado com o preenchimento de dados, o usuário receberá alertas sobre as falhas correspondentes, pois todos os campos são validados. Caso deseje voltar ao menu, basta selecionar o botão voltar.
 
-![Tela Adicionar Jogos](./imagens/adiconarJogos.png)
+![Tela Adicionar Jogos](./imagens/adiconarJogo.png)
 
 ## **2- Listar Jogos**
 Ao selecionar a opção de listar os jogos, o usuário será redirecionado para uma tela onde todos os jogos cadastrados no banco de dados estão listados em um formato de tabela, apresentando todos os dados como foram preenchidos previamente. Para sair desta tela, basta selecionar o botão voltar.
@@ -54,4 +54,4 @@ Por fim, mas não menos importante, também foi feito um Diagrama de Classes exp
 **Roxo** - Controller
 **Rosa** - View
 
-![Diagrama de Classes](./imagens/diagramaDeClassesJogo.png)
+![Diagrama de Classes](./imagens/DiagramaDeClassesJogo.png)
