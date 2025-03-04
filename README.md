@@ -14,12 +14,12 @@ Ao selecionar a opção de listar os jogos, o usuário será redirecionado para 
 
 ![Tela Lista de Jogos](./imagens/listarJogos.png)
 
-h2 3- Adicionar Jogador
+## **3- Adicionar Jogador**
 Nesta opção, o usuário deve preencher os dados referentes ao jogador que será adicionado, como o nome de usuário, quantidade de vitórias e quantidade de derrotas, além de escolher em um combo box o jogo ao qual este usuário pertence. Ao preencher tudo corretamente, basta que utilize o botão salvar para que os dados sejam salvos no banco de dados. Caso haja algum problema com o preenchimento dos dados, o usuário será alertado, pois todos os campos apresentam validação. Para sair desta tela, basta selecionar o botão voltar.
 
 ![Tela Adicionar Jogador](./imagens/adicionarJogador.png)
 
-h2 4- Listar Jogadores Por Jogo
+## **4- Listar Jogadores Por Jogo**
 Selecionando esta opção, o usuário deve passar por uma tela de busca onde ele selecionará o jogo do qual gostaria de ver os jogadores. Após esta escolha, será redirecionado para uma tela onde os jogadores adicionados previamente ao jogo selecionado estão listados em forma de tabela com os dados cadastrados, além de um dado extra: o elo. Este dado é calculado automaticamente pelo programa utilizando os valores de vitórias e derrotas preenchidos ao adicionar o jogador. E, nas duas telas citadas, o usuário pode utilizar o botão de voltar para retornar ao menu.
 
 ![Tela Listar Jogadores](./imagens/listarJogadores.png)
@@ -50,8 +50,8 @@ Como citado anteriormente, este programa tem seu banco de dados feito com o MySQ
 
 Por fim, mas não menos importante, também foi feito um Diagrama de Classes expressando visualmente as classes com seus atributos e métodos presentes neste programa.
 
-**Azul claro** - Model
-**Roxo** - Controller
-**Rosa** - View
+**Azul claro** - Model  
+**Roxo** - Controller  
+**Rosa** - View  
 
 ![Diagrama de Classes](./imagens/DiagramaDeClassesJogo.png)
