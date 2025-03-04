@@ -3,11 +3,9 @@ package me.souajenni.view;
 import me.souajenni.DAO.JogadorDAO;
 import me.souajenni.DAO.JogoDAO;
 import me.souajenni.model.Jogador;
-import me.souajenni.model.Jogo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class AdicionarJogadorAoJogo extends JFrame {
 
     public void carregarJogos() throws SQLException {
         JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
-        List<String> jogos = jogoDAO.NomesDosJogos();
+        List<String> jogos = jogoDAO.nomesDosJogos();
         selecionarJogo.removeAllItems();
         for (String jogo : jogos) {
             selecionarJogo.addItem(jogo);

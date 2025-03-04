@@ -86,7 +86,7 @@ public class JogoDAO {
         return jogo;
     }
 
-    public List<String> NomesDosJogos() throws SQLException {
+    public List<String> nomesDosJogos() throws SQLException {
         Statement statement = this.conexao.createStatement();
 
         List<String> jogos = new ArrayList<>();

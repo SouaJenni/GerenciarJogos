@@ -78,7 +78,7 @@ public class Buscar extends JFrame {
             }
         } else {
             JogoDAO jogoDAO = new JogoDAO(parent.getConexao());
-            List<String> jogos = jogoDAO.NomesDosJogos();
+            List<String> jogos = jogoDAO.nomesDosJogos();
             for (String jogo : jogos) {
                 selecionarItem.addItem(jogo);
             }
