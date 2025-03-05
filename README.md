@@ -54,4 +54,4 @@ Por fim, mas não menos importante, também foi feito um Diagrama de Classes exp
 **Roxo** - Controller  
 **Rosa** - View  
 
-![Diagrama de Classes](./imagens/DiagramaDeClassesJogo.png)
+![Diagrma de classes](./imagens/DiagramaDeClassesJogo.png)
