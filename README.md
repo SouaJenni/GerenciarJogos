@@ -48,7 +48,7 @@ Como citado anteriormente, este programa tem seu banco de dados feito com o MySQ
 
 ![DER](./imagens/derJogo.png)
 
-Por fim, mas não menos importante, também foi feito um Diagrama de Classes expressando visualmente as classes com seus atributos e métodos presentes neste programa.
+Por fim, mas não menos importante, também foi feito um Diagrama de Classes expressando visualmente as classes com seus atributos e métodos presentes neste programa. Observe que as relações entre as classes estão simplificadas e nem todas estão presentes para facilitar a compreensão visual do diagrama. 
 
 **Azul claro** - Model  
 **Roxo** - Controller  
